@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthVision AI Healthcare Awareness Portal</title>
+
+   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="scrollBar"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <nav class="navbar">
+    <a class="nav-brand" href="#">
+      <span class="brand-icon">⎈</span>
+      <span>HealthVision <em>AI</em></span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active">Home</a>
+      <a href="#">Search</a>
+      <a href="#">Statistics</a>
+      <a href="#">Programmes</a>
+      <a href="#">Diseases</a>
+      <a href="#">About</a>
+    </div>
+
+    <div class="nav-actions">
+      <button id="darkToggle" class="btn-dark-toggle" type="button"><i class="fa fa-moon"></i></button>
+      <button id="voiceBtn" class="btn-voice" type="button"><i class="fa fa-microphone"></i></button>
+      <button class="nav-cta" type="button">Explore</button>
+      <div class="ham" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-floating-icons">
+        <i class="fi fa-solid fa-heart-pulse"></i>
+        <i class="fi fa-solid fa-syringe"></i>
+        <i class="fi fa-solid fa-notes-medical"></i>
+        <i class="fi fa-solid fa-bacterium"></i>
+      </div>
+
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Public Health Awareness Platform
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line1">HealthVision</span>
+        <span class="line2">AI Healthcare</span>
+        <span class="line3">Awareness Portal</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Search healthcare programmes, diseases, districts, states, villages, and countries with interactive dashboards and awareness data.
+      </p>
+
+      <div class="hero-btns">
+        <button class="hbtn hbtn-primary" type="button"><i class="fa fa-search"></i> Search Data</button>
+        <button class="hbtn hbtn-outline" type="button"><i class="fa fa-chart-line"></i> View Stats</button>
+        <button class="hbtn hbtn-red" type="button"><i class="fa fa-triangle-exclamation"></i> Emergency Info</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-num" id="cnt1">0</div><div class="hstat-lbl">Districts</div></div>
+        <div class="hstat"><div class="hstat-num" id="cnt2">0</div><div class="hstat-lbl">Coverage %</div></div>
+        <div class="hstat"><div class="hstat-num" id="cnt3">0</div><div class="hstat-lbl">Beneficiaries</div></div>
+        <div class="hstat"><div class="hstat-num" id="cnt4">0</div><div class="hstat-lbl">Programmes</div></div>
+      </div>
+    </section>
+
+    <section class="ai-search-section">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>AI <em>Search</em> Engine</h2>
+          <p>Instant lookup for country, state, district, village, disease, or healthcare programme.</p>
+        </div>
+
+        <div class="ai-search-container">
+          <div class="ai-search-label">SEARCH HEALTH DATA</div>
+          <div class="search-bar-wrap" id="searchWrap">
+            <div class="search-icon-ai"><i class="fa fa-magnifying-glass"></i></div>
+            <input class="search-input-main" id="searchInput" type="text" placeholder="Search any location, disease, or programme..." />
+            <div class="search-tabs">
+              <button class="stab on" type="button">All</button>
+              <button class="stab" type="button">Places</button>
+              <button class="stab" type="button">Diseases</button>
+            </div>
+            <button class="search-go-btn" type="button">Search</button>
+          </div>
+          <div class="ac-box" id="autocompleteBox"></div>
+
+          <div class="quick-cat-wrap">
+            <div class="quick-cat-label">Quick Search Chips</div>
+            <div class="quick-chips-row">
+
+    <button class="quick-chip">India</button>
+    <button class="quick-chip">Kerala</button>
+    <button class="quick-chip">District</button>
+    <button class="quick-chip">Diabetes</button>
+    <button class="quick-chip">TB</button>
+    <button class="quick-chip">Dengue</button>
+    <button class="quick-chip">Malaria</button>
+    <button class="quick-chip">Cancer</button>
+    <button class="quick-chip">Hypertension</button>
+    <button class="quick-chip">Anaemia</button>
+
+</div>
+          </div>
+        </div>
+
+        <div class="res-box" id="resultBox">
+          <div class="res-hdr">
+            <div>
+              <div class="res-title">Search Result</div>
+              <div class="res-sub">Detailed information panel</div>
+            </div>
+            <div class="res-tag rt-d">DATA</div>
+          </div>
+          <div id="resultContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec-dark">
+      <div class="wrap">
+        <div class="grid-3">
+          <div class="gcard">
+            <div class="gcard-icon"><i class="fa fa-syringe"></i></div>
+            <h3>Vaccination</h3>
+            <p>Mission Indradhanush and immunisation support information.</p>
+          </div>
+          <div class="gcard">
+            <div class="gcard-icon"><i class="fa fa-people-roof"></i></div>
+            <h3>Maternal Health</h3>
+            <p>Safe delivery, postnatal care, and nutrition awareness.</p>
+          </div>
+          <div class="gcard">
+            <div class="gcard-icon"><i class="fa fa-brain"></i></div>
+            <h3>Mental Wellness</h3>
+            <p>Support resources and stigma reduction awareness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
